@@ -168,6 +168,8 @@ def detect(img, img_web, vid, vid_web, is_img, weights, conf_thres, iou_thres, c
     old_img_w = old_img_h = imgsz
     old_img_b = 1
 
+    if not is_img:
+        pbar = tqdm(desc="Performing inference...", total=dataset.nframes)
     t0 = time.time()
     for path, img, im0s, vid_cap in dataset:
         img = torch.from_numpy(img).to(device)
@@ -232,6 +234,8 @@ def detect(img, img_web, vid, vid_web, is_img, weights, conf_thres, iou_thres, c
 
                     vid_writer = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                 vid_writer.write(im0)
+        if not is_img:
+            pbar.update(1)
 
     if vid_writer is not None:
         vid_writer.release()  # release previous video writer

@@ -1,5 +1,6 @@
 # Usage: pip install -r requirements.txt
 python=3.11.0
+gradio==3.41.0
 
 # Base ----------------------------------------
 matplotlib>=3.2.2

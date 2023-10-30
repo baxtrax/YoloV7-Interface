@@ -204,9 +204,10 @@ def detect(img, img_web, vid, vid_web, is_img, weights, conf_thres, iou_thres, c
             p = Path(p)  # to Path
             if len(det):
                 # Rescale boxes from img_size to im0 size
+                # The det[:, :4] is the bounding box coordinates
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
 
-                # Print results
+                # Print results``
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
